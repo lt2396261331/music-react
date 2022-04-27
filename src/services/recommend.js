@@ -14,3 +14,21 @@ export function getHotRecommends(limit = 8) {
     }
   })
 }
+
+export function getNewAlbum(limit = 10) {
+  return request({
+    url: '/top/album',
+    params: {
+      limit
+    }
+  })
+}
+
+export function getTopList(idx) {
+  return request({
+    url: '/top/list',
+    params: {
+      idx
+    }
+  })
+}
