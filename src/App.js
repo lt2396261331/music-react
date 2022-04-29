@@ -5,6 +5,7 @@ import routes from './route'
 
 import HYAppHeader from './components/app-header'
 import HYAppFooter from './components/app-footer'
+import AppPlayerBar from './pages/player/app-player-bar'
 
 const App = memo(() => {
   return (
@@ -12,6 +13,7 @@ const App = memo(() => {
       <HYAppHeader />
       {useRoutes(routes)}
       <HYAppFooter />
+      <AppPlayerBar/>
     </>
   )
 })

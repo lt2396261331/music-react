@@ -4,6 +4,10 @@ import TopBanner from './c-cpns/top-banner'
 import HotRecommend from './c-cpns/hot-recommend'
 import NewAlbum from './c-cpns/new-Album'
 import RecommendRanking from './c-cpns/recommend-ranking'
+import UserLogin from './c-cpns/user-login';
+import SettleSinger from './c-cpns/settle-singer';
+import HotAnchor from './c-cpns/hot-anchor';
+
 
 import {
   RecommendWrapper,
@@ -22,7 +26,11 @@ const Recommend = memo((props) => {
           <NewAlbum />
           <RecommendRanking />
         </RecommendLeft>
-        <RecommendRight></RecommendRight>
+        <RecommendRight>
+          <UserLogin/>
+          <SettleSinger/>
+          <HotAnchor/>
+        </RecommendRight>
       </Content>
     </RecommendWrapper>
   )

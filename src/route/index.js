@@ -10,6 +10,7 @@ import Songs from '@/pages/discover/c-pages/songs'
 import Djradio from '@/pages/discover/c-pages/djradio'
 import Artist from '@/pages/discover/c-pages/artist'
 import Album from '@/pages/discover/c-pages/album'
+import Player from '../pages/player'
 
 
 
@@ -24,7 +25,7 @@ const routes = [
     children: [
       {
         path: '/discover',
-        element: <Navigate to='/discover/recommend'/>
+        element: <Navigate to="/discover/recommend" />
       },
       {
         path: '/discover/recommend',
@@ -49,6 +50,10 @@ const routes = [
       {
         path: '/discover/album',
         element: <Album />
+      },
+      {
+        path: '/discover/player',
+        element: <Player />
       }
     ]
   },
