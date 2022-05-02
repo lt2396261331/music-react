@@ -6,10 +6,11 @@ import { getSizeImage, formatDate, getPlaySong } from '@/utils/format-utils'
 import {
   getSongDetailAction,
   changeSequenceAction,
-  changeCurrentIndexAndSongAction
+  changeCurrentIndexAndSongAction,
+  changeCurrentLyricIndexAction
 } from '../store/actionCreators'
 
-import { Slider } from 'antd'
+import { Slider, message } from 'antd'
 
 import { PlaybarWrapper, Control, PlayInfo, Operator } from './style'
 import { NavLink } from 'react-router-dom'
@@ -22,10 +23,12 @@ const AppPlayerBar = memo(() => {
   const [isPlaying, setIsPlaying] = useState(false)
 
   //  redux state
-  const { currentSong, sequence } = useSelector(
+  const { currentSong, sequence, lyricList, currentLyricIndex } = useSelector(
     (state) => ({
       currentSong: state.getIn(['player', 'currentSong']),
-      sequence: state.getIn(['player', 'sequence'])
+      sequence: state.getIn(['player', 'sequence']),
+      lyricList: state.getIn(['player', 'lyricList']),
+      currentLyricIndex: state.getIn(['player', 'currentLyricIndex'])
     }),
     shallowEqual
   )
@@ -59,10 +62,26 @@ const AppPlayerBar = memo(() => {
   }, [isPlaying])
 
   const timeUpdate = (e) => {
+    const time = e.target.currentTime
     if (!isChanging) {
-      setCurrentTime(e.target.currentTime * 1000)
+      setCurrentTime(time * 1000)
       setProgress((currentTime / duration) * 100)
     }
+
+    // 获取当前歌词
+    let lyricIndex = lyricList.findIndex(lyricItem => currentTime <= lyricItem.time) - 1
+    // console.log(lyricList[currentLyricIndex])
+    if (lyricIndex !== currentLyricIndex) {
+      dispatch(changeCurrentLyricIndexAction(lyricIndex))
+      const content = lyricList[lyricIndex] && lyricList[lyricIndex].content
+      message.open({
+        content: content,
+        duration: 0,
+        key: "lyric",
+        className: "lyric-class"
+      })
+    }
+    
   }
   const handleMusicEnded = (e) => {
     if(sequence === 2) {

@@ -6,7 +6,8 @@ const defaultState = Map({
   currentSongIndex: 0,
   playList: [],
   sequence: 0, // 0: 循环, 1: 随机, 2: 单曲
-  lyricList: []
+  lyricList: [],
+  currentLyricIndex: 0
 })
 
 export function reducer(state = defaultState, action) {
@@ -21,6 +22,8 @@ export function reducer(state = defaultState, action) {
       return state.set('sequence', action.sequence)
     case actionTypes.CHANGE_LYRICS_LIST:
       return state.set('lyricList', action.lyricList)
+    case actionTypes.CHNAGE_LYRICE_INDEX:
+      return state.set('currentLyricIndex', action.index)
     default:
       return state
   }
